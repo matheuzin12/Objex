@@ -3,4 +3,6 @@ from django.urls import include, path
 from app.views import *
 urlpatterns = [
 path('admin/', admin.site.urls),
+path('', IndexView.as_view(), name='Index'),
+
 ]

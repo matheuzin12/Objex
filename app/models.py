@@ -1,7 +1,55 @@
 from django.db import models
 
 
+class Cidade(models.Model):
+
+    nome = models.CharField(
+        max_length=100,
+        verbose_name="Nome da cidade"
+    )
+
+    uf = models.CharField(
+        max_length=2,
+        verbose_name="UF"
+    )
+
+    def __str__(self):
+        return f"{self.nome} - {self.uf}"
+
+    class Meta:
+        verbose_name = "Cidade"
+        verbose_name_plural = "Cidades"
+
+
+class Bairro(models.Model):
+
+    nome = models.CharField(
+        max_length=100,
+        verbose_name="Nome do bairro"
+    )
+
+    cidade = models.ForeignKey(
+        Cidade,
+        on_delete=models.CASCADE,
+        verbose_name="Cidade do bairro"
+    )
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = "Bairro"
+        verbose_name_plural = "Bairros"
+
+
 class Pessoa(models.Model):
+
+    OCUPACAO_CHOICES = (
+        ('usuario', 'Usuário'),
+        ('funcionario', 'Funcionário'),
+        ('admin', 'Administrador'),
+    )
+
     nome = models.CharField(
         max_length=100,
         verbose_name="Nome da pessoa"
@@ -22,6 +70,16 @@ class Pessoa(models.Model):
         verbose_name="Email da pessoa"
     )
 
+    ocupacao = models.CharField(
+        max_length=20,
+        choices=OCUPACAO_CHOICES,
+        verbose_name="Ocupação da pessoa"
+    )
+
+    data_cadastro = models.DateField(
+        verbose_name="Data de cadastro"
+    )
+
     def __str__(self):
         return self.nome
 
@@ -30,26 +88,8 @@ class Pessoa(models.Model):
         verbose_name_plural = "Pessoas"
 
 
-class Usuario(models.Model):
-    pessoa = models.ForeignKey(
-        Pessoa,
-        on_delete=models.CASCADE,
-        verbose_name="Pessoa do usuário"
-    )
-
-    data_cadastro = models.DateField(
-        verbose_name="Data de cadastro"
-    )
-
-    def __str__(self):
-        return self.pessoa.nome
-
-    class Meta:
-        verbose_name = "Usuário"
-        verbose_name_plural = "Usuários"
-
-
 class Instituicao(models.Model):
+
     nome = models.CharField(
         max_length=100,
         verbose_name="Nome da instituição"
@@ -74,6 +114,18 @@ class Instituicao(models.Model):
         verbose_name="Endereço da instituição"
     )
 
+    cidade = models.ForeignKey(
+        Cidade,
+        on_delete=models.CASCADE,
+        verbose_name="Cidade da instituição"
+    )
+
+    bairro = models.ForeignKey(
+        Bairro,
+        on_delete=models.CASCADE,
+        verbose_name="Bairro da instituição"
+    )
+
     def __str__(self):
         return self.nome
 
@@ -82,33 +134,33 @@ class Instituicao(models.Model):
         verbose_name_plural = "Instituições"
 
 
-class Funcionario(models.Model):
-    pessoa = models.ForeignKey(
-        Pessoa,
-        on_delete=models.CASCADE,
-        verbose_name="Pessoa do funcionário"
+class Setor(models.Model):
+
+    nome = models.CharField(
+        max_length=100,
+        verbose_name="Nome do setor"
     )
 
-    cargo = models.CharField(
-        max_length=100,
-        verbose_name="Cargo do funcionário"
+    descricao = models.TextField(
+        verbose_name="Descrição do setor"
     )
 
     instituicao = models.ForeignKey(
         Instituicao,
         on_delete=models.CASCADE,
-        verbose_name="Instituição do funcionário"
+        verbose_name="Instituição do setor"
     )
 
     def __str__(self):
-        return self.pessoa.nome
+        return self.nome
 
     class Meta:
-        verbose_name = "Funcionário"
-        verbose_name_plural = "Funcionários"
+        verbose_name = "Setor"
+        verbose_name_plural = "Setores"
 
 
 class Local(models.Model):
+
     nome = models.CharField(
         max_length=100,
         verbose_name="Nome do local"
@@ -124,6 +176,12 @@ class Local(models.Model):
         verbose_name="Instituição do local"
     )
 
+    setor = models.ForeignKey(
+        Setor,
+        on_delete=models.CASCADE,
+        verbose_name="Setor do local"
+    )
+
     def __str__(self):
         return self.nome
 
@@ -133,6 +191,7 @@ class Local(models.Model):
 
 
 class CategoriaObjeto(models.Model):
+
     nome = models.CharField(
         max_length=100,
         verbose_name="Nome da categoria"
@@ -150,7 +209,33 @@ class CategoriaObjeto(models.Model):
         verbose_name_plural = "Categorias dos Objetos"
 
 
+class TipoObjeto(models.Model):
+
+    nome = models.CharField(
+        max_length=100,
+        verbose_name="Nome do tipo"
+    )
+
+    descricao = models.TextField(
+        verbose_name="Descrição do tipo"
+    )
+
+    categoria = models.ForeignKey(
+        CategoriaObjeto,
+        on_delete=models.CASCADE,
+        verbose_name="Categoria do tipo"
+    )
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = "Tipo de Objeto"
+        verbose_name_plural = "Tipos de Objetos"
+
+
 class StatusObjeto(models.Model):
+
     nome = models.CharField(
         max_length=100,
         verbose_name="Nome do status"
@@ -169,6 +254,7 @@ class StatusObjeto(models.Model):
 
 
 class Objeto(models.Model):
+
     nome = models.CharField(
         max_length=100,
         verbose_name="Nome do objeto"
@@ -203,6 +289,12 @@ class Objeto(models.Model):
         verbose_name="Categoria do objeto"
     )
 
+    tipo = models.ForeignKey(
+        TipoObjeto,
+        on_delete=models.CASCADE,
+        verbose_name="Tipo do objeto"
+    )
+
     status = models.ForeignKey(
         StatusObjeto,
         on_delete=models.CASCADE,
@@ -215,10 +307,10 @@ class Objeto(models.Model):
         verbose_name="Local do objeto"
     )
 
-    usuario = models.ForeignKey(
-        Usuario,
+    pessoa = models.ForeignKey(
+        Pessoa,
         on_delete=models.CASCADE,
-        verbose_name="Usuário do objeto"
+        verbose_name="Pessoa responsável"
     )
 
     def __str__(self):
@@ -230,16 +322,17 @@ class Objeto(models.Model):
 
 
 class RegistroPerda(models.Model):
+
     objeto = models.ForeignKey(
         Objeto,
         on_delete=models.CASCADE,
         verbose_name="Objeto perdido"
     )
 
-    usuario = models.ForeignKey(
-        Usuario,
+    pessoa = models.ForeignKey(
+        Pessoa,
         on_delete=models.CASCADE,
-        verbose_name="Usuário"
+        verbose_name="Pessoa"
     )
 
     data_perda = models.DateField(
@@ -251,7 +344,7 @@ class RegistroPerda(models.Model):
     )
 
     def __str__(self):
-        return f"{self.objeto} - {self.usuario}"
+        return f"{self.objeto} - {self.pessoa}"
 
     class Meta:
         verbose_name = "Registro de Perda"
@@ -259,16 +352,17 @@ class RegistroPerda(models.Model):
 
 
 class RegistroEncontrado(models.Model):
+
     objeto = models.ForeignKey(
         Objeto,
         on_delete=models.CASCADE,
         verbose_name="Objeto encontrado"
     )
 
-    funcionario = models.ForeignKey(
-        Funcionario,
+    pessoa = models.ForeignKey(
+        Pessoa,
         on_delete=models.CASCADE,
-        verbose_name="Funcionário"
+        verbose_name="Pessoa responsável"
     )
 
     data_encontro = models.DateField(
@@ -280,7 +374,7 @@ class RegistroEncontrado(models.Model):
     )
 
     def __str__(self):
-        return f"{self.objeto} - {self.funcionario}"
+        return f"{self.objeto} - {self.pessoa}"
 
     class Meta:
         verbose_name = "Registro Encontrado"
@@ -288,6 +382,7 @@ class RegistroEncontrado(models.Model):
 
 
 class Comentario(models.Model):
+
     texto = models.TextField(
         verbose_name="Texto do comentário"
     )
@@ -296,10 +391,10 @@ class Comentario(models.Model):
         verbose_name="Data do comentário"
     )
 
-    usuario = models.ForeignKey(
-        Usuario,
+    pessoa = models.ForeignKey(
+        Pessoa,
         on_delete=models.CASCADE,
-        verbose_name="Usuário"
+        verbose_name="Pessoa"
     )
 
     objeto = models.ForeignKey(
@@ -317,6 +412,7 @@ class Comentario(models.Model):
 
 
 class Evidencia(models.Model):
+
     imagem = models.ImageField(
         upload_to='evidencias/',
         verbose_name="Imagem da evidência"
@@ -340,7 +436,70 @@ class Evidencia(models.Model):
         verbose_name_plural = "Evidências"
 
 
+class Notificacao(models.Model):
+
+    mensagem = models.TextField(
+        verbose_name="Mensagem"
+    )
+
+    data_envio = models.DateField(
+        verbose_name="Data de envio"
+    )
+
+    visualizada = models.BooleanField(
+        verbose_name="Notificação visualizada"
+    )
+
+    pessoa = models.ForeignKey(
+        Pessoa,
+        on_delete=models.CASCADE,
+        verbose_name="Pessoa"
+    )
+
+    def __str__(self):
+        return self.mensagem
+
+    class Meta:
+        verbose_name = "Notificação"
+        verbose_name_plural = "Notificações"
+
+
+class SolicitacaoPosse(models.Model):
+
+    pessoa = models.ForeignKey(
+        Pessoa,
+        on_delete=models.CASCADE,
+        verbose_name="Pessoa"
+    )
+
+    objeto = models.ForeignKey(
+        Objeto,
+        on_delete=models.CASCADE,
+        verbose_name="Objeto"
+    )
+
+    descricao = models.TextField(
+        verbose_name="Descrição da solicitação"
+    )
+
+    data_solicitacao = models.DateField(
+        verbose_name="Data da solicitação"
+    )
+
+    aprovada = models.BooleanField(
+        verbose_name="Solicitação aprovada"
+    )
+
+    def __str__(self):
+        return f"{self.pessoa} - {self.objeto}"
+
+    class Meta:
+        verbose_name = "Solicitação de Posse"
+        verbose_name_plural = "Solicitações de Posse"
+
+
 class HistoricoMovimentacao(models.Model):
+
     objeto = models.ForeignKey(
         Objeto,
         on_delete=models.CASCADE,
@@ -348,23 +507,23 @@ class HistoricoMovimentacao(models.Model):
     )
 
     status_anterior = models.ForeignKey(
-        StatusObjeto,
-        on_delete=models.CASCADE,
-        related_name='status_anterior',
-        verbose_name="Status anterior"
+    StatusObjeto,
+    on_delete=models.CASCADE,
+    related_name='status_anterior',
+    verbose_name="Status anterior"
     )
 
     status_novo = models.ForeignKey(
-        StatusObjeto,
-        on_delete=models.CASCADE,
-        related_name='status_novo',
-        verbose_name="Novo status"
+    StatusObjeto,
+    on_delete=models.CASCADE,
+    related_name='status_novo',
+    verbose_name="Novo status"
     )
 
-    funcionario = models.ForeignKey(
-        Funcionario,
+    pessoa = models.ForeignKey(
+        Pessoa,
         on_delete=models.CASCADE,
-        verbose_name="Funcionário"
+        verbose_name="Pessoa responsável"
     )
 
     data = models.DateField(

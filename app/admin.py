@@ -3,9 +3,10 @@ from .models import *
 
 
 admin.site.register(Pessoa)
-admin.site.register(Usuario)
-admin.site.register(Funcionario)
+admin.site.register(Cidade)
+admin.site.register(Bairro)
 admin.site.register(Instituicao)
+admin.site.register(Setor)
 admin.site.register(Local)
 admin.site.register(CategoriaObjeto)
 admin.site.register(StatusObjeto)
