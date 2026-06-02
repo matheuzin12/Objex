@@ -1,32 +1,51 @@
 <style>
     body {
-        background-image: url('/static/img/fundo.jpg');
+        background-image: url('/static/img/objex.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
+    .caixa-home {
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    padding: 2rem;
+}
+    
     </style>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Objex - Página Inicial</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-</head>
+    <head>
+        {% load static %}
+    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <title>Objex</title>
+    
+        <link rel="icon" type="image/png"
+              href="{% static 'img/lupa.png' %}">
+    
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4da6ff;">
 
         <a class="navbar-brand" href="/">
-            Objex
+            <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="/">
+                    <img src="/static/img/logo_objex.png"
+                         alt="Objex"
+                         width="150"
+                         height="90">
+                </a>
+                
+            </a>
         </a>
     
         <button class="navbar-toggler" type="button"
@@ -153,7 +172,7 @@
 
     <div class="container mt-5">
 
-        <div class="jumbotron text-center">
+        <div class="caixa-home text-center">
 
             <h1 class="display-4">
                 Bem-vindo ao Objex
