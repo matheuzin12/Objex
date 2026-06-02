@@ -1,3 +1,13 @@
+<style>
+    body {
+        background-image: url('/static/img/fundo.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    </style>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,84 +28,127 @@
         <a class="navbar-brand" href="/">
             Objex
         </a>
-
+    
         <button class="navbar-toggler" type="button"
         data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false"
         aria-label="Toggle navigation">
-
+    
             <span class="navbar-toggler-icon"></span>
-
+    
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-
+    
+        <div class="collapse navbar-collapse"
+             id="navbarNav">
+    
             <ul class="navbar-nav">
-
+    
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/">
+                    <a class="nav-link text-dark" href="/">
                         Home
                     </a>
                 </li>
-
+    
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/objetos/">
+                    <a class="nav-link text-dark" href="/cidade/">
+                        Cidade
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/bairro/">
+                        Bairro
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/instituicao/">
+                        Instituição
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/setor/">
+                        Setor
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/local/">
+                        Local
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/pessoa/">
+                        Pessoa
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/categoriaobjeto/">
+                        Categoria
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/tipoobjeto/">
+                        Tipo
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/statusobjeto/">
+                        Status
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/objeto/">
                         Objetos
                     </a>
                 </li>
-
+    
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/registroperda/">
-                        Registrar Perda
+                    <a class="nav-link text-dark" href="/registroperda/">
+                        Perdas
                     </a>
                 </li>
-
+    
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/registroencontrado/">
-                        Objetos Encontrados
+                    <a class="nav-link text-dark" href="/registroencontrado/">
+                        Encontrados
                     </a>
                 </li>
-
+    
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/categoria/">
-                        Categorias
+                    <a class="nav-link text-dark" href="/evidencia/">
+                        Evidências
                     </a>
                 </li>
-
+    
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/local/">
-                        Locais
+                    <a class="nav-link text-dark" href="/comentario/">
+                        Comentários
                     </a>
                 </li>
-
+    
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/instituicao/">
-                        Instituições
+                    <a class="nav-link text-dark" href="/historicomovimentacao/">
+                        Histórico
                     </a>
                 </li>
-
+    
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/usuario/">
-                        Usuários
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/funcionario/">
-                        Funcionários
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/admin/">
+                    <a class="nav-link text-dark" href="/admin/">
                         Administração
                     </a>
                 </li>
-
+    
             </ul>
-
+    
         </div>
-
+    
     </nav>
 
     <div class="container mt-5">
@@ -121,7 +174,7 @@
                 Registrar Objeto Perdido
             </a>
             
-            <a class="btn btn-primary btn-lg" href="/objetos/" role="button">
+            <a class="btn btn-primary btn-lg" href="/objeto/" role="button">
                 Visualizar Objetos
             </a>
 

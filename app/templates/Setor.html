@@ -142,25 +142,21 @@
     </nav>
 
     <div class="container mt-5">
-        <h2 class="mb-4">Comentários</h2>
+        <h2 class="mb-4">Tabela de Setores</h2>
     
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Objeto</th>
-                    <th>Pessoa</th>
-                    <th>Comentário</th>
-                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Instituição</th>
                 </tr>
             </thead>
     
             <tbody>
-                {% for comentario in comentarios %}
+                {% for setor in setores %}
                 <tr>
-                    <td>{{ comentario.objeto }}</td>
-                    <td>{{ comentario.pessoa }}</td>
-                    <td>{{ comentario.descricao }}</td>
-                    <td>{{ comentario.data }}</td>
+                    <td>{{ setor.nome }}</td>
+                    <td>{{ setor.instituicao }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -174,5 +170,3 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
-
-</html>

@@ -141,31 +141,29 @@
     
     </nav>
 
-    <div class="container mt-5">
-        <h2 class="mb-4">Comentários</h2>
-    
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Objeto</th>
-                    <th>Pessoa</th>
-                    <th>Comentário</th>
-                    <th>Data</th>
-                </tr>
-            </thead>
-    
-            <tbody>
-                {% for comentario in comentarios %}
-                <tr>
-                    <td>{{ comentario.objeto }}</td>
-                    <td>{{ comentario.pessoa }}</td>
-                    <td>{{ comentario.descricao }}</td>
-                    <td>{{ comentario.data }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+
+                    <div class="container mt-5">
+                        <h2 class="mb-4">Tabela de Cidades</h2>
+                    
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>UF</th>
+                                </tr>
+                            </thead>
+                    
+                            <tbody>
+                                {% for cidade in cidades %}
+                                <tr>
+                                    <td>{{ cidade.nome }}</td>
+                                    <td>{{ cidade.uf }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 

@@ -140,32 +140,28 @@
         </div>
     
     </nav>
-
     <div class="container mt-5">
-        <h2 class="mb-4">Comentários</h2>
+        <h2 class="mb-4">Tabela de Bairros</h2>
     
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Objeto</th>
-                    <th>Pessoa</th>
-                    <th>Comentário</th>
-                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Cidade</th>
                 </tr>
             </thead>
     
             <tbody>
-                {% for comentario in comentarios %}
+                {% for bairro in bairros %}
                 <tr>
-                    <td>{{ comentario.objeto }}</td>
-                    <td>{{ comentario.pessoa }}</td>
-                    <td>{{ comentario.descricao }}</td>
-                    <td>{{ comentario.data }}</td>
+                    <td>{{ bairro.nome }}</td>
+                    <td>{{ bairro.cidade }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+   
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 

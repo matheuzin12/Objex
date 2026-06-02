@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título da Página</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+        <a class="navbar-brand" href="/">
+            Objex
+        </a>
+    
+        <button class="navbar-toggler" type="button"
+        data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false"
+        aria-label="Toggle navigation">
+    
+            <span class="navbar-toggler-icon"></span>
+    
+        </button>
+    
+        <div class="collapse navbar-collapse"
+             id="navbarNav">
+    
+            <ul class="navbar-nav">
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/">
+                        Home
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/cidade/">
+                        Cidade
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/bairro/">
+                        Bairro
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/instituicao/">
+                        Instituição
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/setor/">
+                        Setor
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/local/">
+                        Local
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/pessoa/">
+                        Pessoa
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/categoriaobjeto/">
+                        Categoria
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/tipoobjeto/">
+                        Tipo
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/statusobjeto/">
+                        Status
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/objeto/">
+                        Objetos
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/registroperda/">
+                        Perdas
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/registroencontrado/">
+                        Encontrados
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/evidencia/">
+                        Evidências
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/comentario/">
+                        Comentários
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/historicomovimentacao/">
+                        Histórico
+                    </a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/admin/">
+                        Administração
+                    </a>
+                </li>
+    
+            </ul>
+    
+        </div>
+    
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Evidências</h2>
+    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Objeto</th>
+                    <th>Descrição</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                {% for evidencia in evidencias %}
+                <tr>
+                    <td>{{ evidencia.objeto }}</td>
+                    <td>{{ evidencia.descricao }}</td>
+                    <td>{{ evidencia.data }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -142,25 +142,21 @@
     </nav>
 
     <div class="container mt-5">
-        <h2 class="mb-4">Comentários</h2>
+        <h2 class="mb-4">Tipos de Objetos</h2>
     
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Objeto</th>
-                    <th>Pessoa</th>
-                    <th>Comentário</th>
-                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Categoria</th>
                 </tr>
             </thead>
     
             <tbody>
-                {% for comentario in comentarios %}
+                {% for tipo in tipos %}
                 <tr>
-                    <td>{{ comentario.objeto }}</td>
-                    <td>{{ comentario.pessoa }}</td>
-                    <td>{{ comentario.descricao }}</td>
-                    <td>{{ comentario.data }}</td>
+                    <td>{{ tipo.nome }}</td>
+                    <td>{{ tipo.categoria }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
