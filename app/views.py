@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+
 from .models import *
 
 
@@ -109,3 +110,124 @@ class HistoricosMovimentacaoView(View):
         historicos = HistoricoMovimentacao.objects.all()
         return render(request, 'historicomovimentacao.html',
                       {'historicos': historicos})
+    
+from .forms import ObjetoForm
+
+class ObjetoCreateView(View):
+
+    def get(self, request):
+
+        form = ObjetoForm()
+
+        return render(
+            request,
+            'objeto_form.html',
+            {'form': form}
+        )
+
+
+    def post(self, request):
+
+        form = ObjetoForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect('objetos')
+
+        return render(
+            request,
+            'objeto_form.html',
+            {'form': form}
+        )
+class ObjetoDeleteView(View):
+
+    def get(self, request, pk):
+        objeto = get_object_or_404(Objeto, pk=pk)
+
+        objeto.delete()
+
+        return redirect('objetos')
+    
+
+from .forms import RegistroPerdaForm
+    
+class RegistroPerdaCreateView(View):
+
+    def get(self, request):
+        form = RegistroPerdaForm()
+
+        return render(
+            request,
+            'registroperda_form.html',
+            {'form': form}
+        )
+
+    def post(self, request):
+        form = RegistroPerdaForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('registroperda')
+
+        return render(
+            request,
+            'registroperda_form.html',
+            {'form': form}
+        )
+    
+from .forms import RegistroEncontradoForm
+
+class RegistroEncontradoCreateView(View):
+
+    def get(self, request):
+        form = RegistroEncontradoForm()
+
+        return render(
+            request,
+            'registroencontrado_form.html',
+            {'form': form}
+        )
+
+    def post(self, request):
+        form = RegistroEncontradoForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('registroencontrado')
+
+        return render(
+            request,
+            'registroencontrado_form.html',
+            {'form': form}
+        )
+class RegistroPerdaDeleteView(View):
+
+    def get(self, request, pk):
+
+        registro = get_object_or_404(
+            RegistroPerda,
+            pk=pk
+        )
+
+        registro.delete()
+
+        return redirect('registroperda')
+    
+    
+    
+class RegistroEncontradoDeleteView(View):
+
+    def get(self, request, pk):
+
+        registro = get_object_or_404(
+            RegistroEncontrado,
+            pk=pk
+        )
+
+        registro.delete()
+
+        return redirect('registroencontrado')

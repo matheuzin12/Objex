@@ -175,12 +175,28 @@
                     <td>{{ objeto.status }}</td>
                     <td>{{ objeto.local }}</td>
                     <td>{{ objeto.pessoa }}</td>
+
+                    <td>
+                        <a href="{% url 'objeto_delete' objeto.id %}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Tem certeza que este objeto foi encontrado?')">
+                            Encontrado
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
+    <div class="text-center mt-3">
+       
+    
+        <a href="{% url 'objeto_create' %}"
+           class="btn btn-success">
+            + Adicionar Objeto
+        </a>
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>

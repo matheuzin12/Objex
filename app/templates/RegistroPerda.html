@@ -173,10 +173,27 @@
                     <td>{{ registro.pessoa }}</td>
                     <td>{{ registro.local }}</td>
                     <td>{{ registro.data_perda }}</td>
+
+                  
+                    <td>
+                        <a href="{% url 'registroperda_delete' registro.id %}"
+                           class="btn btn-danger btn-sm">
+                    
+                            Excluir
+                    
+                        </a>
+                    </td>
+                  
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+    <div class="text-center mb-3">
+        <a href="{% url 'registroperda_create' %}"
+           class="btn btn-danger">
+           Registrar Perda
+        </a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

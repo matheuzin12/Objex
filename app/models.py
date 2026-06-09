@@ -56,14 +56,19 @@ class Pessoa(models.Model):
     )
 
     cpf = models.CharField(
-        max_length=11,
-        unique=True,
-        verbose_name="CPF da pessoa"
+    max_length=14,
+    unique=True,
+    verbose_name="CPF"
     )
 
     telefone = models.CharField(
-        max_length=20,
-        verbose_name="Telefone da pessoa"
+        max_length=15,
+        verbose_name="Telefone"
+    )
+
+    data_cadastro = models.DateField(
+        auto_now_add=True,
+        verbose_name="Data de cadastro"
     )
 
     email = models.EmailField(
@@ -76,9 +81,7 @@ class Pessoa(models.Model):
         verbose_name="Ocupação da pessoa"
     )
 
-    data_cadastro = models.DateField(
-        verbose_name="Data de cadastro"
-    )
+    
 
     def __str__(self):
         return self.nome
@@ -276,10 +279,13 @@ class Objeto(models.Model):
 
     imagem = models.ImageField(
         upload_to='objetos/',
+        blank=True,
+        null=True,
         verbose_name="Imagem do objeto"
     )
 
     data_registro = models.DateField(
+        auto_now_add=True,
         verbose_name="Data de registro"
     )
 
@@ -323,24 +329,33 @@ class Objeto(models.Model):
 
 class RegistroPerda(models.Model):
 
+    pessoa = models.ForeignKey(
+        Pessoa,
+        on_delete=models.CASCADE,
+        verbose_name="Pessoa responsável"
+    )
+
     objeto = models.ForeignKey(
         Objeto,
         on_delete=models.CASCADE,
         verbose_name="Objeto perdido"
     )
 
-    pessoa = models.ForeignKey(
-        Pessoa,
+    local = models.ForeignKey(
+        Local,
         on_delete=models.CASCADE,
-        verbose_name="Pessoa"
-    )
-
-    data_perda = models.DateField(
-        verbose_name="Data da perda"
+        verbose_name="Local da perda"
     )
 
     descricao = models.TextField(
-        verbose_name="Descrição da perda"
+        blank=True,
+        null=True,
+        verbose_name="Descrição"
+    )
+
+    data_registro = models.DateField(
+        auto_now_add=True,
+        verbose_name="Data do registro"
     )
 
     def __str__(self):
@@ -349,7 +364,6 @@ class RegistroPerda(models.Model):
     class Meta:
         verbose_name = "Registro de Perda"
         verbose_name_plural = "Registros de Perdas"
-
 
 class RegistroEncontrado(models.Model):
 
@@ -366,10 +380,13 @@ class RegistroEncontrado(models.Model):
     )
 
     data_encontro = models.DateField(
+        auto_now_add=True,
         verbose_name="Data do encontro"
     )
 
     observacao = models.TextField(
+        blank=True,
+        null=True,
         verbose_name="Observação"
     )
 
@@ -388,6 +405,7 @@ class Comentario(models.Model):
     )
 
     data = models.DateField(
+        auto_now_add=True,
         verbose_name="Data do comentário"
     )
 
@@ -404,7 +422,7 @@ class Comentario(models.Model):
     )
 
     def __str__(self):
-        return self.texto
+        return f"Comentário de {self.pessoa}"
 
     class Meta:
         verbose_name = "Comentário"
@@ -420,6 +438,11 @@ class Evidencia(models.Model):
 
     descricao = models.TextField(
         verbose_name="Descrição da evidência"
+    )
+
+    data_envio = models.DateField(
+        auto_now_add=True,
+        verbose_name="Data da evidência"
     )
 
     objeto = models.ForeignKey(
@@ -443,10 +466,12 @@ class Notificacao(models.Model):
     )
 
     data_envio = models.DateField(
+        auto_now_add=True,
         verbose_name="Data de envio"
     )
 
     visualizada = models.BooleanField(
+        default=False,
         verbose_name="Notificação visualizada"
     )
 
@@ -483,10 +508,12 @@ class SolicitacaoPosse(models.Model):
     )
 
     data_solicitacao = models.DateField(
+        auto_now_add=True,
         verbose_name="Data da solicitação"
     )
 
     aprovada = models.BooleanField(
+        default=False,
         verbose_name="Solicitação aprovada"
     )
 
@@ -507,17 +534,17 @@ class HistoricoMovimentacao(models.Model):
     )
 
     status_anterior = models.ForeignKey(
-    StatusObjeto,
-    on_delete=models.CASCADE,
-    related_name='status_anterior',
-    verbose_name="Status anterior"
+        StatusObjeto,
+        on_delete=models.CASCADE,
+        related_name='historico_status_anterior',
+        verbose_name="Status anterior"
     )
 
     status_novo = models.ForeignKey(
-    StatusObjeto,
-    on_delete=models.CASCADE,
-    related_name='status_novo',
-    verbose_name="Novo status"
+        StatusObjeto,
+        on_delete=models.CASCADE,
+        related_name='historico_status_novo',
+        verbose_name="Novo status"
     )
 
     pessoa = models.ForeignKey(
@@ -527,6 +554,7 @@ class HistoricoMovimentacao(models.Model):
     )
 
     data = models.DateField(
+        auto_now_add=True,
         verbose_name="Data da movimentação"
     )
 
