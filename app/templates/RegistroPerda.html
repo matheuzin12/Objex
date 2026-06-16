@@ -49,7 +49,7 @@
             <span class="navbar-toggler-icon"></span>
     
         </button>
-    
+        <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
     
             <li class="nav-item">
@@ -155,7 +155,7 @@
             </li>
 
         </ul>
-    
+    </div>
     </nav>
 
     <div class="container mt-5">
@@ -182,11 +182,9 @@
                   
                     <td>
                         <a href="{% url 'registroperda_delete' registro.id %}"
-                           class="btn btn-danger btn-sm">
-                    
-                            Excluir
-                    
-                        </a>
+                        class="btn btn-danger">
+                         Excluir
+                         </a>
                     </td>
                   
                 </tr>

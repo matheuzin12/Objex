@@ -231,3 +231,4 @@ class RegistroEncontradoDeleteView(View):
         registro.delete()
 
         return redirect('registroencontrado')
+
